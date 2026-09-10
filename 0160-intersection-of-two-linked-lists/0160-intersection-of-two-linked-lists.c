@@ -6,19 +6,15 @@
  * };
  */
 struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
-// jaswin is the god of shinobi ;
-struct ListNode *a = headA;
-struct ListNode *b = headB;
-while (a!=NULL){
-    if (b==NULL){
-        b=headB;
-        a=a->next;
+    if (headA == NULL || headB == NULL) return NULL;
+
+    struct ListNode *a = headA;
+    struct ListNode *b = headB;
+
+    while (a != b) {
+        a = (a == NULL) ? headB : a->next;
+        b = (b == NULL) ? headA : b->next;
     }
-if (a==b)
-{
-    return  a;
-}
-b= b->next;
-}
-return NULL;
+
+    return a;
 }
