@@ -1,22 +1,24 @@
-
-
 int* sortedSquares(int* nums, int numsSize, int* returnSize) {
     int* result = (int*)malloc(numsSize * sizeof(int));
-    for (int i = 0; i < numsSize; i++) {
-        result[i] = nums[i] * nums[i];
-    }
-
-    // Bubble sort
-    for (int i = 0; i < numsSize; i++) {
-        for (int j = 0; j < numsSize - i - 1; j++) {
-            if (result[j] > result[j + 1]) {
-                int temp = result[j];
-                result[j] = result[j + 1];
-                result[j + 1] = temp;
-            }
-        }
-    }
-
     *returnSize = numsSize;
+
+    int left = 0;
+    int right = numsSize - 1;
+    int pos = numsSize - 1;
+
+    while (left <= right) {
+        int leftSquare = nums[left] * nums[left];
+        int rightSquare = nums[right] * nums[right];
+
+        if (leftSquare > rightSquare) {
+            result[pos] = leftSquare;
+            left++;
+        } else {
+            result[pos] = rightSquare;
+            right--;
+        }
+        pos--;
+    }
+
     return result;
 }
